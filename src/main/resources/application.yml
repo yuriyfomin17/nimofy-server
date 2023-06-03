@@ -1,4 +1,26 @@
-server.port=8081
-
-spring.jpa.hibernate.ddl-auto=create-drop
-batch
+spring:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+        show_sql: true
+        jdbc:
+          batch_size: 50
+  application:
+    name: nimofy-server
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+server:
+  port: 8080
+exchange:
+  api:
+    binance: https://www.binance.com/api/v3/ticker/price
+    bybit: https://api-testnet.bybit.com/v5/market/tickers?category=linear
+    poloniex: https://api.poloniex.com/markets
+    bittrex: https://api.bittrex.com/v3/markets
+    bitmart: https://api-cloud.bitmart.com/spot/v1/ticker_detail
+    bitfinex: https://api-pub.bitfinex.com/v2/ticker/

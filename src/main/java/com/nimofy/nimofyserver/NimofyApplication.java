@@ -1,4 +1,4 @@
-package com.nimofy.nimofybot;
+package com.nimofy.nimofyserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

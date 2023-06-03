@@ -1,28 +1,49 @@
-package com.nimofy.nimofybot;
+package com.nimofy.nimofyserver;
 
+import com.nimofy.nimofyserver.service.impl.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class TestService {
-    private final RestTemplate restTemplate;
+
+//    private final RestTemplate restTemplate;
+//    private final TradingPairRepo tradingPairRepo;
+    private final BinanceExchange binanceExchange;
+    private final BybitExchange bybitExchange;
+    private final PoloniexExchange poloniexExchange;
+    private final BittrexExchange bittrexExchange;
+    private final BitmartExchange bitmartExchange;
+    private final BitfinexExchange bitfinexExchange;
 
     @EventListener(ContextRefreshedEvent.class)
-    public void printAllPairs(){
-        String url = "https://api.binance.com/api/v3/exchangeInfo";
-        ExchangePairs exchangePairs = restTemplate.getForObject(url, ExchangePairs.class);
-        Objects.requireNonNull(exchangePairs);
-        List<TradingPair> tradingPairs = exchangePairs.symbols().stream()
-                .filter(tradingPair -> tradingPair.symbol().contains("USDT") && tradingPair.status().equals("TRADING") && tradingPair.symbol().contains("RVN"))
-                .toList();
-        System.out.println(tradingPairs);
-        System.out.println("List size:" + tradingPairs.size());
+    public void printAllPairs() {
+        binanceExchange.calculatePrice("BTCUSDT");
+        bybitExchange.calculatePrice("BTCUSDT");
+        poloniexExchange.calculatePrice("BTCUSDT");
+        bittrexExchange.calculatePrice("BTCUSDT");
+        bitmartExchange.calculatePrice("BTCUSDT");
+        bitfinexExchange.calculatePrice("BTCUSDT");
+
+//        String url = "https://api.binance.com/api/v3/exchangeInfo";
+//        ExchangePairsDTO exchangePairsDTO = restTemplate.getForObject(url, ExchangePairsDTO.class);
+//        Objects.requireNonNull(exchangePairsDTO);
+//        List<TradingPairDTO> tradingPairDTOS = exchangePairsDTO.symbols().stream()
+//                .filter(tradingPairDTO -> tradingPairDTO.symbol().contains("USDT") && tradingPairDTO.status().equals("TRADING"))
+//                .toList();
+//        List<TradingPair> tradingPairList = tradingPairDTOS.stream()
+//                .map(this::getTradingPair)
+//                .toList();
+//        tradingPairRepo.saveAll(tradingPairList);
+
     }
+
+//    private TradingPair getTradingPair(TradingPairDTO tradingPairDTO) {
+//        TradingPair tradingPair = new TradingPair();
+//        tradingPair.setTradingPairName(tradingPairDTO.symbol());
+//        return tradingPair;
+//    }
 }

@@ -1,4 +1,4 @@
-package com.nimofy.nimofybot;
+package com.nimofy.nimofyserver.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

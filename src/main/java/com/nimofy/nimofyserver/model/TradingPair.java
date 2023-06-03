@@ -1,9 +1,7 @@
-package com.nimofy.nimofybot.model;
+package com.nimofy.nimofyserver.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
@@ -17,7 +15,7 @@ public class TradingPair {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String tradingPair;
+    private String tradingPairName;
 
     @Override
     public int hashCode() {
@@ -30,4 +28,6 @@ public class TradingPair {
         if (!(o instanceof TradingPair tradingPair)) return false;
         return id != null && id.equals(tradingPair.getId());
     }
+
+    public TradingPair() {}
 }
