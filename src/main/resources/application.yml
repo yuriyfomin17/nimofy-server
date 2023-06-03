@@ -24,3 +24,4 @@ exchange:
     bittrex: https://api.bittrex.com/v3/markets
     bitmart: https://api-cloud.bitmart.com/spot/v1/ticker_detail
     bitfinex: https://api-pub.bitfinex.com/v2/ticker/
+    kraken: https://api.kraken.com/0/public/Ticker
