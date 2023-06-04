@@ -11,7 +11,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -24,15 +23,20 @@ public class KrakenExchange implements Exchange {
     public double calculatePrice(String symbol) {
         URI apiUrl = buildApiUrl(symbol);
         JsonNode response = restTemplate.getForObject(apiUrl, JsonNode.class);
-        String newSymbol = symbol.equals("BTCUSDT") ? "XBTUSDT": symbol;
-        System.out.println(response);
-        Objects.requireNonNull(response);
-        List<JsonNode> doubles = StreamSupport.stream(response.spliterator(), false)
-                .map(node -> node.get("result"))
-                .toList();
-        System.out.println(doubles);
-        return 0.0;
+        List<Double> prices = getPrice(symbol, response);
+        return prices.get(0);
     }
+
+    private static List<Double> getPrice(String symbol, JsonNode response) {
+        String newSymbol = symbol.equals("BTCUSDT") ? "XBTUSDT" : symbol;
+        Objects.requireNonNull(response);
+        System.out.println(response);
+        var priceNode = response.get("result").get(newSymbol).get("c");
+        return StreamSupport.stream(priceNode.spliterator(), false)
+                .map(JsonNode::asDouble)
+                .toList();
+    }
+
     private URI buildApiUrl(String symbol) {
         return UriComponentsBuilder.fromHttpUrl(krakenApiUrl)
                 .queryParam("pair", symbol)

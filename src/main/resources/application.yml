@@ -25,3 +25,6 @@ exchange:
     bitmart: https://api-cloud.bitmart.com/spot/v1/ticker_detail
     bitfinex: https://api-pub.bitfinex.com/v2/ticker/
     kraken: https://api.kraken.com/0/public/Ticker
+    kucoin: https://api.kucoin.com/api/v1/market/orderbook/level1
+    huobi: https://api.huobi.pro/market/trade
+    mexc: https://api.mexc.com/api/v3/ticker/price

@@ -19,6 +19,10 @@ public class TestService {
     private final BitmartExchange bitmartExchange;
     private final BitfinexExchange bitfinexExchange;
     private final KrakenExchange krakenExchange;
+    private final KucoinExchange kucoinExchange;
+    private final HuobiExchange huobiExchange;
+
+    private final MexcExchange mexcExchange;
 
     @EventListener(ContextRefreshedEvent.class)
     public void printAllPairs() {
@@ -29,6 +33,9 @@ public class TestService {
         bitmartExchange.calculatePrice("BTCUSDT");
         bitfinexExchange.calculatePrice("BTCUSDT");
         krakenExchange.calculatePrice("BTCUSDT");
+        kucoinExchange.calculatePrice("BTCUSDT");
+        huobiExchange.calculatePrice("BTCUSDT");
+        mexcExchange.calculatePrice("BTCUSDT");
 
 //        String url = "https://api.binance.com/api/v3/exchangeInfo";
 //        ExchangePairsDTO exchangePairsDTO = restTemplate.getForObject(url, ExchangePairsDTO.class);
