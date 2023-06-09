@@ -43,6 +43,9 @@ public class TradingPair {
     @Column(unique = true, name = "poloniex_trading_pair_name")
     private String poloniexTradingPairName;
 
+    @Column(unique = true, name = "kraken_trading_pair_name")
+    private String krakenTradingPairName;
+
     @Override
     public int hashCode() {
         return getClass().hashCode();

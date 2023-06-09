@@ -17,8 +17,8 @@ public class AppConfig {
     @Bean
     public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(150);
-        executor.setMaxPoolSize(150);
+        executor.setCorePoolSize(10);
+        executor.setMaxPoolSize(10);
         executor.initialize();
         return executor;
     }
