@@ -1,7 +1,7 @@
 package com.nimofy.nimofyserver.service.impl;
 
 import com.nimofy.nimofyserver.dto.huobi.HuobiResponseDTO;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,11 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class HuobiExchange implements Exchange {
+public class HuobiPairCalculator implements PairCalculator {
+
     @Value("${exchange.api.huobi}")
     private String huobiApiUrl;
+
     private final RestTemplate restTemplate;
 
     @Override

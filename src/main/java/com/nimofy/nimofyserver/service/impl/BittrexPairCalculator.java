@@ -1,7 +1,7 @@
 package com.nimofy.nimofyserver.service.impl;
 
 import com.nimofy.nimofyserver.dto.bittrex.BittrexDTO;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,13 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BittrexExchange implements Exchange {
+public class BittrexPairCalculator implements PairCalculator {
+
     @Value("${exchange.api.bittrex}")
     private String bittrexApiUrl;
+
     private final RestTemplate restTemplate;
+
     @Override
     public double calculatePrice(String symbol) {
         URI apiUrl = buildApiUrl(symbol);

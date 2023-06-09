@@ -1,7 +1,7 @@
 package com.nimofy.nimofyserver.service.impl;
 
 import com.nimofy.nimofyserver.dto.bybit.BybitResponseDTO;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,8 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BybitExchange implements Exchange {
+public class BybitPairCalculator implements PairCalculator {
+
     @Value("${exchange.api.bybit}")
     private String bybitApiUrl;
 

@@ -1,7 +1,7 @@
 package com.nimofy.nimofyserver.service.impl;
 
 import com.nimofy.nimofyserver.dto.poloniex.PoloniexDTO;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,9 +13,11 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class PoloniexExchange implements Exchange {
+public class PoloniexPairCalculator implements PairCalculator {
+
     @Value("${exchange.api.poloniex}")
     private String poloniexApiUrl;
+
     private final RestTemplate restTemplate;
 
     @Override
@@ -26,6 +28,7 @@ public class PoloniexExchange implements Exchange {
         System.out.println(poloniexDTO);
         return poloniexDTO.price();
     }
+
     private URI buildApiUrl(String symbol) {
         String[] arr = symbol.split("USDT");
         String newSymbol = arr[0] + "_USDT";

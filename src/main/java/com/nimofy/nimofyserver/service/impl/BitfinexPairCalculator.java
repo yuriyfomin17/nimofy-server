@@ -1,7 +1,6 @@
 package com.nimofy.nimofyserver.service.impl;
 
-import com.nimofy.nimofyserver.dto.bitfinex.BitfinexDTO;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -17,15 +16,16 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BitfinexExchange implements Exchange {
+public class BitfinexPairCalculator implements PairCalculator {
 
     @Value("${exchange.api.bitfinex}")
     private String bitfinexApiUrl;
+
     private final RestTemplate restTemplate;
+
     @Override
     public double calculatePrice(String symbol) {
         URI apiUrl = buildApiUrl(symbol);
-        System.out.println(apiUrl);
         ParameterizedTypeReference<List<Double>> responseType = new ParameterizedTypeReference<>() {};
         ResponseEntity<List<Double>> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, null, responseType);
         List<Double> pairInfo = responseEntity.getBody();

@@ -1,6 +1,7 @@
 package com.nimofy.nimofyserver.service;
 
-public interface Exchange {
+public interface PairCalculator {
 
     double calculatePrice(String symbol);
+
 }

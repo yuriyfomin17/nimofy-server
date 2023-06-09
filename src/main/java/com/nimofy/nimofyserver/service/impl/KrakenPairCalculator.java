@@ -1,7 +1,7 @@
 package com.nimofy.nimofyserver.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,13 @@ import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
-public class KrakenExchange implements Exchange {
+public class KrakenPairCalculator implements PairCalculator {
+
     @Value("${exchange.api.kraken}")
     private String krakenApiUrl;
+
     private final RestTemplate restTemplate;
+
     @Override
     public double calculatePrice(String symbol) {
         URI apiUrl = buildApiUrl(symbol);

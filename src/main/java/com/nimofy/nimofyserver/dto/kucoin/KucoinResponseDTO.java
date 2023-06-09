@@ -1,4 +1,3 @@
 package com.nimofy.nimofyserver.dto.kucoin;
 
-public record KucoinResponseDTO(KucoinPriceDTO data) {
-}
+public record KucoinResponseDTO(KucoinPriceDTO data) {}

@@ -1,7 +1,7 @@
 package com.nimofy.nimofyserver.service.impl;
 
-import com.nimofy.nimofyserver.dto.bitmart.BitmartDTO;
-import com.nimofy.nimofyserver.service.Exchange;
+import com.nimofy.nimofyserver.dto.kucoin.KucoinResponseDTO;
+import com.nimofy.nimofyserver.service.PairCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -13,27 +13,27 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class BitmartExchange implements Exchange {
-    @Value("${exchange.api.bitmart}")
-    private String bitmartApiUrl;
+public class KucoinPairCalculator implements PairCalculator {
+
+    @Value("${exchange.api.kucoin}")
+    private String kucoinApiUrl;
+
     private final RestTemplate restTemplate;
 
     @Override
     public double calculatePrice(String symbol) {
         URI apiUrl = buildApiUrl(symbol);
-        System.out.println(apiUrl);
-        BitmartDTO bitmartDTO = restTemplate.getForObject(apiUrl, BitmartDTO.class);
-        Objects.requireNonNull(bitmartDTO);
-        System.out.println(bitmartDTO);
-        return bitmartDTO.data().bestAsk();
+        KucoinResponseDTO kucoinResponseDTO = restTemplate.getForObject(apiUrl, KucoinResponseDTO.class);
+        Objects.requireNonNull(kucoinResponseDTO);
+        System.out.println(kucoinResponseDTO);
+        return kucoinResponseDTO.data().price();
     }
 
     private URI buildApiUrl(String symbol) {
         String[] arr = symbol.split("USDT");
-        String newSymbol = arr[0] + "_USDT";
-        return UriComponentsBuilder.fromHttpUrl(bitmartApiUrl)
+        String newSymbol = arr[0] + "-USDT";
+        return UriComponentsBuilder.fromHttpUrl(kucoinApiUrl)
                 .queryParam("symbol", newSymbol)
-                .build()
-                .toUri();
+                .build().toUri();
     }
 }
